@@ -1,0 +1,19 @@
+version: '3'
+
+services:
+  spyder_ide:
+    container_name: spyder_servidor
+    image: compdatasci/spyder-desktop
+    volumes:
+      - ./spyderbackup:/home/ubuntu/myproject
+
+  anaconda-sv:
+    container_name: anaconda_sv
+    image: continuumio/anaconda3
+    volumes:
+      - ./notebooks:/opt/notebooks
+    ports:
+      - "8888:8888"
+    command:
+      /opt/conda/bin/jupyter notebook --notebook-dir=/opt/notebooks --ip='0.0.0.0' --port=8888 --no-browser --allow-root
+    tty: true 
